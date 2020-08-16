@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e8dc350dd0b0714e99817214d2820e6, type: 3}
-  m_Name: Test
+  m_Name: Barghest
   m_EditorClassIdentifier: 
-  ID: 
-  level: 0
-  icon: {fileID: 0}
+  ID: Barghest
+  level: 1
+  icon: {fileID: 21300000, guid: 3aba78361c86fea498ea345b3d62f80f, type: 3}

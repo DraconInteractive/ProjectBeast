@@ -35,9 +35,6 @@ public enum ElementalStat
 public enum CharacterStat
 {
     None,
-    Speed,
-    Agility,
-    Strength,
-    Dexterity
+    Phase
 }
 
