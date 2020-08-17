@@ -12,7 +12,7 @@ public class BeastInspector : Editor
     {
         var beast = (Beast)target;
         serializedObject.Update();
-
+        bool setDirty = false;
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
         beast.ID = EditorGUILayout.TextField("Name", beast.ID);
@@ -22,10 +22,12 @@ public class BeastInspector : Editor
         if (GUILayout.Button("Add"))
         {
             beast.exp += 10;
+            setDirty = true;
         }
         if (GUILayout.Button("Retract"))
         {
             beast.exp -= 10;
+            setDirty = true;
         }
         EditorGUILayout.Space(26);
         EditorGUILayout.EndHorizontal();
@@ -42,18 +44,22 @@ public class BeastInspector : Editor
         if (GUILayout.Button("Damage"))
         {
             beast.hp -= 10;
+            setDirty = true;
         }
         if (GUILayout.Button("Heal"))
         {
             beast.hp += 10;
+            setDirty = true;
         }
         if (GUILayout.Button("Exhaust"))
         {
             beast.mp -= 10;
+            setDirty = true;
         }
         if (GUILayout.Button("Refresh"))
         {
             beast.mp += 10;
+            setDirty = true;
         }
         EditorGUILayout.EndHorizontal();
 
@@ -69,6 +75,7 @@ public class BeastInspector : Editor
         if (GUILayout.Button("Add"))
         {
             beast.damages.Add(new DamageStat());
+            setDirty = true;
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.Space(8);
@@ -82,6 +89,7 @@ public class BeastInspector : Editor
             if (GUILayout.Button("Remove"))
             {
                 beast.damages.Remove(beast.damages[i]);
+                setDirty = true;
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -92,6 +100,7 @@ public class BeastInspector : Editor
         if (GUILayout.Button("Add"))
         {
             beast.effects.Add(new EffectStat());
+            setDirty = true;
         }
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.Space(8);
@@ -104,10 +113,14 @@ public class BeastInspector : Editor
             if (GUILayout.Button("Remove"))
             {
                 beast.effects.Remove(beast.effects[i]);
+                setDirty = true;
             }
             EditorGUILayout.EndHorizontal();
         }
-
+        if (setDirty)
+        {
+            EditorUtility.SetDirty(beast);
+        }
         serializedObject.ApplyModifiedProperties();
     }
 }
