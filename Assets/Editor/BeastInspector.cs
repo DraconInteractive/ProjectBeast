@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using JetBrains.Annotations;
 using System.Linq;
+using ICSharpCode.NRefactory.PrettyPrinter;
 
 [CustomEditor(typeof(Beast))]
 public class BeastInspector : Editor
@@ -119,7 +120,12 @@ public class BeastInspector : Editor
         }
         if (setDirty)
         {
+            Debug.Log("Set dirty");
             EditorUtility.SetDirty(beast);
+            Undo.RecordObject(beast, "Test");
+            AssetDatabase.SaveAssets();
+            // Refresh to show changes in the editor
+            AssetDatabase.Refresh();
         }
         serializedObject.ApplyModifiedProperties();
     }
